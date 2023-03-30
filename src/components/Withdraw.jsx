@@ -1,12 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 
 function Withdraw(props) {
   const [amount, setAmount] = useState("");
+  const withdrawRef = useRef([]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
     const { userId, handleWithdraw } = props;
     handleWithdraw(userId, amount);
+    withdrawRef.current.push(amount); // add the withdrawal amount to the ref
+    console.log(withdrawRef.current); // log the array of withdrawal amounts
     setAmount("");
   };
 

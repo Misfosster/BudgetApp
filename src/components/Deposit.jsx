@@ -1,12 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 
 function Deposit(props) {
   const [amount, setAmount] = useState("");
+  const depositRef = useRef([]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
     const { userId, handleDeposit } = props;
     handleDeposit(userId, amount);
+    depositRef.current.push(amount); // add the deposit amount to the ref
+    console.log(depositRef.current); // log the array of deposit amounts
     setAmount("");
   };
 
@@ -30,4 +33,3 @@ function Deposit(props) {
 }
 
 export default Deposit;
-
