@@ -5,8 +5,8 @@ import axios from 'axios';
 function CurrencyExchange() {
     const API_ID = import.meta.env.VITE_CE_API_ID;
     const [currencyRates, setCurrencyRates] = useState({});
-    const [fromCurrency, setFromCurrency] = useState('USD');
-    const [toCurrency, setToCurrency] = useState('EUR');
+    const [fromCurrency, setFromCurrency] = useState('DKK');
+    const [toCurrency, setToCurrency] = useState('SEK');
     const [amount, setAmount] = useState(1);
     const [convertedAmount, setConvertedAmount] = useState(0);
 
@@ -49,6 +49,8 @@ function CurrencyExchange() {
             <div>
                 <label htmlFor="from-currency">From:</label>
                 <select id="from-currency" value={fromCurrency} onChange={handleFromCurrencyChange}>
+                    <option value="DKK">DKK</option>
+                    <option value="SEK">SEK</option>
                     <option value="USD">USD</option>
                     <option value="EUR">EUR</option>
                     <option value="GBP">GBP</option>
@@ -60,6 +62,8 @@ function CurrencyExchange() {
             <div>
                 <label htmlFor="to-currency">To:</label>
                 <select id="to-currency" value={toCurrency} onChange={handleToCurrencyChange}>
+                    <option value="DKK">DKK</option>
+                    <option value="SEK">SEK</option>
                     <option value="USD">USD</option>
                     <option value="EUR">EUR</option>
                     <option value="GBP">GBP</option>
