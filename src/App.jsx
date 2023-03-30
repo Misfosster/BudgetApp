@@ -3,10 +3,10 @@ import Deposit from "./components/Deposit";
 import Withdraw from "./components/Withdraw";
 import Balance from "./components/Balance";
 import Transfer from "./components/Transfer";
-import Exchange from "./components/Exchange";
 import { useState } from "react";
 import UserList from "./components/UserList.jsx";
 import LoginForm from "./components/LoginForm.jsx";
+import CurrencyExchange from "./CurrencyExchange.jsx";
 
 
 function App() {
@@ -35,7 +35,7 @@ function App() {
       <Withdraw />
       <Balance />
       <Transfer />
-      {/* <Exchange /> */}
+      <CurrencyExchange/>
     </div>
   );
 }
