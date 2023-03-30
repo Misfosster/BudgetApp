@@ -14,8 +14,6 @@ function CurrencyExchange() {
         const fetchCurrencyRates = async () => {
             const response = await axios.get(`https://openexchangerates.org/api/latest.json?app_id=${API_ID}`);
 
-
-
             setCurrencyRates(response.data.rates);
         };
         fetchCurrencyRates();
