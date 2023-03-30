@@ -1,11 +1,13 @@
-
 import './styles/App.css'
-
+import axios from "axios";
+import CurrencyExchange from "./CurrencyExchange.jsx";
 function App() {
 
   return (
     <div>
-        Hello World
+        <div>
+            <CurrencyExchange/>
+        </div>
     </div>
   )
 }
