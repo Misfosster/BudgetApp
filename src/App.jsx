@@ -1,129 +1,21 @@
-import { useState, useEffect, useRef } from 'react';
-import { fetchTransfers, createTransfer, updateTransfer, deleteTransfer } from './api/crud';
-import { deposit } from './actions/deposit';
-import { withdraw } from './actions/withdrawal';
-import { transfer } from './actions/transfer';
-import { exchange } from './actions/exchange';
+import React from "react";
+import Deposit from "./components/Deposit";
+import Withdraw from "./components/Withdraw";
+import Balance from "./components/Balance";
+import Transfer from "./components/Transfer";
+import Exchange from "./components/Exchange";
 
 function App() {
-  const [transfers, setTransfers] = useState([]);
-  const [amount, setAmount] = useState('');
-  const [currency, setCurrency] = useState('USD');
-  const [recipient, setRecipient] = useState('');
-  let [error, setError] = useState(null);
-  const amountInput = useRef(null);
-
-  useEffect(() => {
-    fetchTransfers().then(data => {
-      setTransfers(data);
-    });
-  }, []);
-
-  function handleDeposit(e) {
-    e.preventDefault();
-    deposit(amount, currency).then(data => {
-      setTransfers([...transfers, data]);
-      setAmount('');
-      amountInput.current.focus();
-    });
-  }
-
-  function handleWithdraw(e) {
-    e.preventDefault();
-    withdraw(amount, currency).then(data => {
-      setTransfers([...transfers, data]);
-      setAmount('');
-      amountInput.current.focus();
-    });
-  }
-
-  function handleTransfer(e) {
-    e.preventDefault();
-    transfer(amount, currency, recipient).then(data => {
-      setTransfers([...transfers, data]);
-      setAmount('');
-      setRecipient('');
-      amountInput.current.focus();
-    });
-  }
-
-  function handleExchange(e) {
-    e.preventDefault();
-    exchange(amount, currency, 'EUR').then(data => {
-      createTransfer(data).then(data => {
-        setTransfers([...transfers, data]);
-        setAmount('');
-        amountInput.current.focus();
-      });
-    });
-  }
-
-  function handleDelete(id) {
-    deleteTransfer(id).then(() => {
-      setTransfers(transfers.filter(transfer => transfer.id !== id));
-    });
-  }
-
   return (
-    <div className="container">
+    <div>
       <h1>Budget App</h1>
-      {error && <div className="alert alert-danger">{error.message}</div>}
-      <div className="row">
-        <div className="col-md-6">
-          <form onSubmit={handleDeposit}>
-            <h2>Deposit</h2>
-            <div className="form-group">
-              <label>Amount:</label>
-              <input type="number" className="form-control" value={amount} onChange={e => setAmount(parseFloat(e.target.value))} />
-            </div>
-            <div className="form-group">
-              <label>Currency:</label>
-              <input type="text" className="form-control" value={currency} onChange={e => setCurrency(e.target.value)} />
-            </div>
-            <button className="btn btn-primary">Submit</button>
-          </form>
-        </div>
-        <div className="col-md-6">
-          <form onSubmit={handleWithdraw}>
-            <h2>Withdraw</h2>
-            <div className="form-group">
-              <label>Amount:</label>
-              <input type="number" className="form-control" value={amount} onChange={e => setAmount(parseFloat(e.target.value))} />
-            </div>
-            <div className="form-group">
-              <label>Currency:</label>
-              <input type="text" className="form-control" value={currency} onChange={e => setCurrency(e.target.value)} />
-            </div>
-            <button className="btn btn-primary">Submit</button>
-          </form>
-        </div>
-      </div>
-      <div className="col-md-4">
-        <h2>Exchange</h2>
-        <form onSubmit={handleExchange}>
-          <div className="form-group">
-            <label htmlFor="exchange-amount">Amount</label>
-            <input type="number" className="form-control" id="exchange-amount" value={amount} onChange={(e) => setAmount(e.target.value)} ref={amountInput} required />
-          </div>
-
-          <div className="form-group">
-            <label htmlFor="exchange-currency">Currency</label>
-            <select className="form-control" id="exchange-currency" value={currency} onChange={(e) => setCurrency(e.target.value)}>
-              <option value="USD">USD</option>
-              <option value="EUR">EUR</option>
-              <option value="GBP">GBP</option>
-              <option value="JPY">JPY</option>
-            </select>
-          </div>
-
-          <button type="submit" className="btn btn-primary">Exchange to EUR</button>
-        </form>
-      </div>
+      <Deposit />
+      <Withdraw />
+      <Balance />
+      <Transfer />
+      {/* <Exchange /> */}
     </div>
-      
-  )
+  );
 }
-      
+
 export default App;
-
-
