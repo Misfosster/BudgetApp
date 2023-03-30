@@ -98,8 +98,32 @@ function App() {
           </form>
         </div>
       </div>
+      <div className="col-md-4">
+        <h2>Exchange</h2>
+        <form onSubmit={handleExchange}>
+          <div className="form-group">
+            <label htmlFor="exchange-amount">Amount</label>
+            <input type="number" className="form-control" id="exchange-amount" value={amount} onChange={(e) => setAmount(e.target.value)} ref={amountInput} required />
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="exchange-currency">Currency</label>
+            <select className="form-control" id="exchange-currency" value={currency} onChange={(e) => setCurrency(e.target.value)}>
+              <option value="USD">USD</option>
+              <option value="EUR">EUR</option>
+              <option value="GBP">GBP</option>
+              <option value="JPY">JPY</option>
+            </select>
+          </div>
+
+          <button type="submit" className="btn btn-primary">Exchange to EUR</button>
+        </form>
       </div>
+    </div>
+      
   )
 }
       
 export default App;
+
+
