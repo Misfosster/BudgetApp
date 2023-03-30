@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import User from "./components/User";
 import Withdraw from "./components/Withdraw";
 import Deposit from "./components/Deposit";
-
+import CurrencyExchange from "./components/CurrencyExchange";
 
 function App() {
     const [users, setUsers] = useState({
@@ -44,16 +44,21 @@ function App() {
             <User user={users.User3}/>
 
             <h3>Deposit and Withdraw buttons for each user:</h3>
-            <Deposit userId="User1" handleDeposit={handleDeposit}/>
-            <Withdraw userId="User1" handleWithdraw={handleWithdraw}/>
+            <Deposit userId="User1" handleDeposit={handleDeposit}userName={users.User1.name}/>
+            <Withdraw userId="User1" handleWithdraw={handleWithdraw} userName={users.User1.name}/>
             <br/>
 
-            <Deposit userId="User1" handleDeposit={handleDeposit}/>
-            <Withdraw userId="User2" handleWithdraw={handleWithdraw}/>
+            <Deposit userId="User2" handleDeposit={handleDeposit}userName={users.User2.name}/>
+            <Withdraw userId="User2" handleWithdraw={handleWithdraw} userName={users.User2.name}/>
             <br/>
 
-            <Deposit userId="User1" handleDeposit={handleDeposit}/>
-            <Withdraw userId="User3" handleWithdraw={handleWithdraw}/>
+            <Deposit userId="User3" handleDeposit={handleDeposit}userName={users.User3.name}/>
+            <Withdraw userId="User3" handleWithdraw={handleWithdraw} userName={users.User3.name}/>
+
+
+
+            <CurrencyExchange/>
+
         </div>
     );
 }
